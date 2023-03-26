@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PRN_Final_API.Models.Subject>
+<h1>@ViewData["Title"]</h1>
+<div>
+    <div id="product-title-header">
+        <div id="product-title-1" style="margin: 20px 0px; display: flex">
+            <form asp-action="SearchSubjectByName" style="display: flex; margin-right: 5px">
+                <label name="search" style="margin-right: 5px">Find subject by name</label>
+                <input name="search" style="margin-right: 5px" type="text" />
+                <button class="btn btn-sm btn-primary" style="margin-right: 5px">Search</button>
+            </form> |
+            <a href="~/subjectnormal/index" style="margin-left: 5px">Back to full list</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubjectId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubjectName)
+                </th>
+
+                <th> View Detail </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubjectId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubjectName)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Details", "Details", new { id = item.SubjectId})         *@
+                        <a href="~/subjectnormal/details?id=@item.SubjectId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

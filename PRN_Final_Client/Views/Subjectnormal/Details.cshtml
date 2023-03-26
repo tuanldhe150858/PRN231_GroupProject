@@ -6,7 +6,7 @@
 <div>
     <h4>Subject Details</h4>
     <hr />
-    <form action="@Url.Action("Upload", "Subject")" method="post" enctype="multipart/form-data">
+    <form action="@Url.Action("Upload", "Subjectnormal")" method="post" enctype="multipart/form-data">
         <input type="file" name="file" />
         <button type="submit">Upload</button>
     </form>
@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         @*@Html.ActionLink("Download", "Download", new { filename = item.FilePath})         *@
-                        <a href="@Url.Action("Download", "Subject", new {filename=item.FilePath })">Download</a>
+                        <a href="@Url.Action("Download", "Subjectnormal", new {filename=item.FilePath })">Download</a>
                     </td>
                 </tr>
             }
