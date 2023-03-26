@@ -42,7 +42,7 @@ namespace PRN_Final_Client.Controllers
                 t = JsonSerializer.Deserialize<AccountDTO>(strData, options);
                 HttpContext.Session.SetString("AccName", t.Email);
               //  HttpContext.Session.SetString("AccRole", teacher.Role);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Subject");
             }
             else
             {
@@ -71,7 +71,7 @@ namespace PRN_Final_Client.Controllers
 
                 HttpContext.Session.SetString("AccName", t.Email);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Subject");
             }
             else
             {

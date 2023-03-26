@@ -76,7 +76,19 @@ namespace PRN_Final_API.Controllers
         [HttpGet("GetSubjectById/{subjectId}")]
         public IActionResult GetSubjectById(int subjectId)
         {
-            var subject = context.Subjects.Where(s => s.SubjectId == subjectId).FirstOrDefault();
+            var subject = context.Subjects
+                .Select(c => new
+                {
+                    c.SubjectId,
+                    c.SubjectName,
+                    c.ClassId,
+                    FileDetail = c.FileDetails.Select(s => new
+                    {
+                        s.FileId,
+                        s.FileName,
+                        s.FilePath
+                    })
+                }).FirstOrDefault(s => s.SubjectId == subjectId);
             if (subject != null)
             {
                 return Ok(subject);
