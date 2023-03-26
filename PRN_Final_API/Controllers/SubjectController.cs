@@ -6,6 +6,7 @@ using PRN_Final_API.Models;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 ﻿using Microsoft.AspNetCore.Http;
+using System.Xml.Linq;
 
 namespace PRN_Final_API.Controllers
 {
@@ -58,46 +59,46 @@ namespace PRN_Final_API.Controllers
                 }).ToList();
             return Ok(subjects);
         }
-        /// <summary>
-        /// hung lam
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult GetAllSubject()
+        [HttpGet("GetSubjectByName/{subjectName}")]
+        public async Task<IActionResult> GetSubjectByName(string subjectName)
         {
-            return Ok(context.Subjects.ToList());
-        }
-
-        [HttpGet]
-        [Route("{name}")]
-        public IActionResult GetSubjectByName(string name)
-        {
-            var subject = context.Subjects.Where(s => s.SubjectName.Contains(name)).ToList();
-            if (subject.Any())
+            var subject = context.Subjects.Where(s => s.SubjectName.Equals(subjectName)).FirstOrDefault();
+            if(subject != null)
             {
                 return Ok(subject);
-            } else
+            }
+            else
             {
-                return NotFound();
+                return BadRequest();
             }
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public IActionResult GetSubjectById(int id)
+        [HttpGet("GetSubjectById/{subjectId}")]
+        public IActionResult GetSubjectById(int subjectId)
         {
-            var subject = context.Subjects.Include(s => s.FileDetails).FirstOrDefault(s => s.SubjectId == id);
-            if (subject == null) return NotFound();
-            else return Ok(subject);
+            var subject = context.Subjects.Where(s => s.SubjectId == subjectId).FirstOrDefault();
+            if (subject != null)
+            {
+                return Ok(subject);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        [HttpGet]
-        [Route("{classId}")]
+        [HttpGet("GetSubjectsByClassId{classId}")]
         public IActionResult GetSubjectOfClass(int classId)
         {
-            var subjectOfClass = context.Subjects.Where(s => s.ClassId == classId).ToList();
-            if (subjectOfClass.Any()) return Ok(subjectOfClass);
-            else return NotFound();
+            var subjects = context.Subjects.Where(s => s.ClassId == classId).ToList();
+            if (subjects != null)
+            {
+                return Ok(subjects);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
