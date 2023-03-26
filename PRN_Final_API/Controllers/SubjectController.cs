@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PRN_Final_API.Controllers
 {
@@ -88,7 +89,7 @@ namespace PRN_Final_API.Controllers
             }
         }
 
-        [HttpGet("GetSubjectById")]
+        [HttpGet("GetSubjectById/{subjectId}")]
         public IActionResult GetSubjectById(int subjectId)
         {
             var subject = context.Subjects

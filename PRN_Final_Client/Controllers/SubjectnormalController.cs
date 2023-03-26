@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PRN_Final_API.DTO;
 using PRN_Final_API.Models;
 using System.Net.Http.Headers;
@@ -6,6 +7,7 @@ using System.Text.Json;
 
 namespace PRN_Final_Client.Controllers
 {
+    [Authorize(Policy = "Student")]
     public class SubjectnormalController : Controller
     {
         private readonly HttpClient client = null;
@@ -17,6 +19,7 @@ namespace PRN_Final_Client.Controllers
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ApiUrl = "http://localhost:5043/api";
         }
+
         public async Task<IActionResult> Index()
         {
             var url = ApiUrl + "/subject/GetAllSubjects";
@@ -124,22 +127,25 @@ namespace PRN_Final_Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file)
         {
-            var formContent = new MultipartFormDataContent();
-            formContent.Add(new StreamContent(file.OpenReadStream()), "file", file.FileName);
-            var url = ApiUrl + "/filedetail/uploadfile";
-            HttpResponseMessage response = client
-                .PostAsync(url, formContent)
-                .GetAwaiter().GetResult();
-            if (response.IsSuccessStatusCode)
-            {
-                //var filestream = await response.Content.ReadAsStreamAsync();
-                //return File(filestream, "application/octet-stream", filename);
-                return RedirectToAction("Index", "Subjectnormal");
-            }
+            if(file == null) return NoContent();
             else
             {
-                return NoContent();
+                var formContent = new MultipartFormDataContent();
+                formContent.Add(new StreamContent(file.OpenReadStream()), "file", file.FileName);
+                var url = ApiUrl + "/filedetail/uploadfile";
+                HttpResponseMessage response = client
+                    .PostAsync(url, formContent)
+                    .GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Subjectnormal");
+                }
+                else
+                {
+                    return NoContent();
+                }
             }
+           
         }
 
     }

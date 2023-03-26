@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using PRN_Final_API.Models;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 
@@ -25,13 +28,12 @@ namespace PRN_Final_Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TeacherLogin(AccountDTO teacher)
+        public async Task<IActionResult> Login(AccountDTO teacher)
         {
-            var url = ApiUrl + "/Login/TeacherLogin/";
+            var url = ApiUrl + "/Login/Login/";
             HttpResponseMessage response = client
                 .GetAsync(url + teacher.Email + "/" + teacher.Password)
                 .GetAwaiter().GetResult();
-            AccountDTO t;
             if (response.IsSuccessStatusCode)
             {
                 string strData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -39,10 +41,23 @@ namespace PRN_Final_Client.Controllers
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                t = JsonSerializer.Deserialize<AccountDTO>(strData, options);
-                HttpContext.Session.SetString("AccName", t.Email);
-              //  HttpContext.Session.SetString("AccRole", teacher.Role);
-                return RedirectToAction("Index", "Subjectnormal");
+                AccountDTO acc = JsonSerializer.Deserialize<AccountDTO>(strData, options);
+                var claims = new[]
+               {
+                    new Claim(ClaimTypes.NameIdentifier, acc.Email),
+                    new Claim(ClaimTypes.Role, acc.Role)
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+                };
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                if (acc.Role.Equals("0")) return RedirectToAction("Index", "Subjectnormal");
+                else return RedirectToAction("Index", "Subject");
             }
             else
             {
@@ -51,33 +66,33 @@ namespace PRN_Final_Client.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> StudentLogin(AccountDTO student)
-        {
-            var url = ApiUrl + "/Login/StudentLogin/";
-            HttpResponseMessage response = client
-                .GetAsync(url + student.Email + "/" + student.Password)
-                .GetAwaiter().GetResult();
-            AccountDTO t;
+        //[HttpPost]
+        //public async Task<IActionResult> StudentLogin(AccountDTO student)
+        //{
+        //    var url = ApiUrl + "/Login/StudentLogin/";
+        //    HttpResponseMessage response = client
+        //        .GetAsync(url + student.Email + "/" + student.Password)
+        //        .GetAwaiter().GetResult();
+        //    AccountDTO t;
 
-            if (response.IsSuccessStatusCode)
-            {
-                string strData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-                t = JsonSerializer.Deserialize<AccountDTO>(strData, options);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string strData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        //        var options = new JsonSerializerOptions
+        //        {
+        //            PropertyNameCaseInsensitive = true
+        //        };
+        //        t = JsonSerializer.Deserialize<AccountDTO>(strData, options);
 
-                HttpContext.Session.SetString("AccName", t.Email);
+        //        HttpContext.Session.SetString("AccName", t.Email);
 
-                return RedirectToAction("Index", "Subjectnormal");
-            }
-            else
-            {
-                ViewData["msg"] = "Login fails";
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index", "Subjectnormal");
+        //    }
+        //    else
+        //    {
+        //        ViewData["msg"] = "Login fails";
+        //        return View();
+        //    }
+        //}
     }
 }

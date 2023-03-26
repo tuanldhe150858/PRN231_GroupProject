@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PRN_Final_API.DTO;
 using PRN_Final_API.Models;
 using System.Net.Http.Headers;
@@ -6,6 +7,7 @@ using System.Text.Json;
 
 namespace PRN_Final_Client.Controllers
 {
+    [Authorize(Policy = "Teacher")]
     public class SubjectController : Controller
     {
         private readonly HttpClient client = null;
