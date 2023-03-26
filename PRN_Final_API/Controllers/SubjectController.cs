@@ -63,8 +63,8 @@ namespace PRN_Final_API.Controllers
         [HttpGet("GetSubjectByName")]
         public async Task<IActionResult> GetSubjectByName(string subjectName)
         {
-            var subject = context.Subjects
-                .Where(s => s.SubjectName.Equals(subjectName))
+            var subjects = context.Subjects
+                .Where(s => s.SubjectName.Contains(subjectName))
                 .Select(c => new
                 {
                     c.SubjectId,
@@ -77,10 +77,10 @@ namespace PRN_Final_API.Controllers
                         s.FileName,
                         s.FilePath
                     }).ToList()
-                }).FirstOrDefault();
-            if (subject != null)
+                }).ToList();
+            if (subjects != null)
             {
-                return Ok(subject);
+                return Ok(subjects);
             }
             else
             {

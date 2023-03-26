@@ -1,0 +1,34 @@
+﻿@model PRN_Final_API.Models.AccountDTO
+
+<div id="form">
+    <div style="display: flex">
+        <h2>Login</h2>
+        <div class="msg-error" style="text-align:left">
+            @ViewData["msg"]
+        </div>
+        <div class="login-box teacher-loginbox">
+            <form class="teach-login" asp-action="TeacherLogin" asp-controller="Login" method="post">
+                <p>Teacher Login</p>
+                <label>Email<span style="color: red;">*</span></label><br />
+                <input asp-for="@Model.Email" /><br />
+                @*<span class="msg-error" asp-validation-for="@Model.TeacherModel.Mail"></span><br />*@
+                <label>Password<span style="color: red;">*</span></label><br />
+                <input asp-for="@Model.Password" type="password"/><br />
+                @*<span class="msg-error" asp-validation-for="@Model.TeacherModel.Password"></span><br />*@
+                <input type="submit" value="Login in" /><br />
+            </form>
+        </div>
+        <div class="login-box student-loginbox">
+            <form class="stu-login" asp-action="StudentLogin" asp-controller="Login" method="post">
+                <p>Student Login</p>
+                <label>Email<span style="color: red;">*</span></label><br />
+                <input asp-for="@Model.Email" /><br />
+                @*<span class="msg-error" asp-validation-for="@Model.StudentModel.Mail"></span><br />*@
+                <label>Password<span style="color: red;">*</span></label><br />
+                <input asp-for="@Model.Password" type="password"/><br />
+                @*<span class="msg-error" asp-validation-for="@Model.StudentModel.Password"></span><br />*@
+                <input type="submit" value="Login in" /><br />
+            </form>
+        </div>
+    </div>
+</div>

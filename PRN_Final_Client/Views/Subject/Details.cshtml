@@ -1,0 +1,59 @@
+﻿@using PRN_Final_API.Models
+@model PRN_Final_API.Models.Subject
+
+<h1>Details</h1>
+
+<div>
+    <h4>Subject Details</h4>
+    <hr />
+    <form action="@Url.Action("Upload", "Subject")" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload</button>
+    </form>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Subject Id</label>
+        <p>@Model.SubjectId</p>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput2">Subject Name</label>
+        <p>@Model.SubjectName</p>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput3">Class Id</label>
+        <p>@Model.ClassId</p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    File Id
+                </th>
+                <th>
+                    File name
+                </th>
+
+                <th> Download </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["file"] as List<FileDetail>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Download", "Download", new { filename = item.FilePath})         *@
+                        <a href="@Url.Action("Download", "Subject", new {filename=item.FilePath })">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*    <div class="form-group">
+        <input class="mt-1 btn btn-success" type="submit" value="Submit">
+        </div>*@
+</div>
