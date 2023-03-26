@@ -35,7 +35,7 @@ namespace PRN_Final_Client.Controllers
                 return View(subjects);
             }
 
-            return View();
+            return NoContent();
         }
 
         [HttpPost]
@@ -55,12 +55,11 @@ namespace PRN_Final_Client.Controllers
                     PropertyNameCaseInsensitive = true
                 };
                 subjects = JsonSerializer.Deserialize<List<Subject>>(strData, options);
-                if (subjects.Any()) return View(subjects);
-                else return View();
+                return View(subjects);
             }
             else
             {
-                return View();
+                return NoContent();
             }
         }
 
@@ -102,10 +101,47 @@ namespace PRN_Final_Client.Controllers
                     PropertyNameCaseInsensitive = true
                 };
                 List<FileDetail> files = JsonSerializer.Deserialize<List<FileDetail>>(strData, options);
-                //ViewData["file"] = subject.FileDetails;
                 return files;
             }
             else { return null; }
+        }
+
+        public async Task<IActionResult> Download(string filename)
+        {
+            var url = ApiUrl + "/filedetail/downloadfile/";
+            HttpResponseMessage response = client
+                .GetAsync(url + filename)
+                .GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                var filestream = await response.Content.ReadAsStreamAsync();
+                return File(filestream, "application/octet-stream", filename);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            var formContent = new MultipartFormDataContent();
+            formContent.Add(new StreamContent(file.OpenReadStream()), "file", file.FileName);
+            var url = ApiUrl + "/filedetail/uploadfile";
+            HttpResponseMessage response = client
+                .PostAsync(url, formContent)
+                .GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                //var filestream = await response.Content.ReadAsStreamAsync();
+                //return File(filestream, "application/octet-stream", filename);
+                return RedirectToAction("Index", "Subject");
+            }
+            else
+            {
+                return NoContent();
+            }
         }
 
     }

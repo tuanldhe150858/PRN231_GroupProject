@@ -6,6 +6,10 @@
 <div>
     <h4>Subject Details</h4>
     <hr />
+    <form action="@Url.Action("Upload", "Subject")" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload</button>
+    </form>
     <div class="form-group">
         <label for="exampleFormControlInput1">Subject Id</label>
         <p>@Model.SubjectId</p>
@@ -42,8 +46,8 @@
                         @Html.DisplayFor(modelItem => item.FileName)
                     </td>
                     <td>
-                        @*@Html.ActionLink("Details", "Details", new { id = item.SubjectId})         *@
-                        <a href="#">Download</a>
+                        @*@Html.ActionLink("Download", "Download", new { filename = item.FilePath})         *@
+                        <a href="@Url.Action("Download", "Subject", new {filename=item.FilePath })">Download</a>
                     </td>
                 </tr>
             }

@@ -5,6 +5,8 @@ using PRN_Final_API.DTO;
 using PRN_Final_API.Models;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.IO;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace PRN_Final_API.Controllers
 {
@@ -96,6 +98,60 @@ namespace PRN_Final_API.Controllers
             {
                 return false;
             }
+        }
+
+        [HttpPost]
+        [Route("uploadfile")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            var result = await WriteFile(file);
+            FileDetail newFile = new FileDetail
+            {
+                FileName = "test2",
+                FilePath = file.FileName,
+                SubjectId = 3,
+                Subject = null
+            };
+            context.FileDetails.Add(newFile);
+            context.SaveChanges();
+            return Ok(result);
+        }
+
+        private async Task<string> WriteFile(IFormFile file)
+        {
+            string filename = "";
+            try
+            {
+                //var extension = "." + file.FileName.Split(".")[file.FileName.Split(".").Length - 1];
+                //filename = DateTime.Now.Ticks.ToString() + extension;
+                filename = file.FileName;
+
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+                var exactpath = Path.Combine(filePath,filename);
+                using (var stream = new FileStream(exactpath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            } catch (Exception ex)
+            {
+
+            }
+            return filename;
+        }
+
+        [HttpGet]
+        [Route("downloadfile/{filename}")]
+        public async Task<IActionResult> Download(string filename)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Files", filename);
+
+            var file = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(file, "application/octet-stream", Path.GetFileName(filePath));
         }
     }
 }

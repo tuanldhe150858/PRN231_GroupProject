@@ -13,7 +13,7 @@
                 <input asp-for="@Model.Email" /><br />
                 @*<span class="msg-error" asp-validation-for="@Model.TeacherModel.Mail"></span><br />*@
                 <label>Password<span style="color: red;">*</span></label><br />
-                <input asp-for="@Model.Password" /><br />
+                <input asp-for="@Model.Password" type="password"/><br />
                 @*<span class="msg-error" asp-validation-for="@Model.TeacherModel.Password"></span><br />*@
                 <input type="submit" value="Login in" /><br />
             </form>
@@ -25,7 +25,7 @@
                 <input asp-for="@Model.Email" /><br />
                 @*<span class="msg-error" asp-validation-for="@Model.StudentModel.Mail"></span><br />*@
                 <label>Password<span style="color: red;">*</span></label><br />
-                <input asp-for="@Model.Password" /><br />
+                <input asp-for="@Model.Password" type="password"/><br />
                 @*<span class="msg-error" asp-validation-for="@Model.StudentModel.Password"></span><br />*@
                 <input type="submit" value="Login in" /><br />
             </form>
