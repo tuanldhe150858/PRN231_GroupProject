@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\vs2022Project\2023\group_project\Group_project\PRN231_GroupProject\PRN_Final_Client
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Class/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Class/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Class/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -30,6 +46,42 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Student/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Student/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Student/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Subject/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Subject/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Subject/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Teacher/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Teacher/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/Teacher/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/vs2022Project/2023/group_project/Group_project/PRN231_GroupProject/PRN_Final_Client/Views/_ViewImports.cshtml]

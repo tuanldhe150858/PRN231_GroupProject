@@ -1,0 +1,75 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Student> studentsList = (List<Student>)ViewData["StudentsList"];
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Students List</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("GoToAddPage", "Student")" class="btn btn-primary float-left">Add New Student</a>
+            </div>
+            <div class="col-md-6">
+                <form method="get" action="@Url.Action("Search", "Student")">
+                    <div class="input-group">
+                        <input type="text" name="StudentId" class="form-control" placeholder="Search by student id...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>ClasseId</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Search != null)
+                    {
+                        <tr>
+                            <td>@ViewBag.Search.StudentId</td>
+                            <td>@ViewBag.Search.Mail</td>
+                            <td>@ViewBag.Search.Password</td>
+                            <td>@ViewBag.Search.Role</td>
+                            <td>@ViewBag.Search.ClassId</td>
+                            <td>
+                                <a href="@Url.Action("GoToUpdatePage", "Student", new { studentId = ViewBag.Search.StudentId })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Delete", "Student", new { studentId = ViewBag.Search.StudentId })" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var Student in studentsList)
+                        {
+                            <tr>
+                                <td>@Student.StudentId</td>
+                                <td>@Student.Mail</td>
+                                <td>@Student.Password</td>
+                                <td>@Student.Role</td>
+                                <td>@Student.ClassId</td>
+                                <td>
+                                    <a href="@Url.Action("GoToUpdatePage", "Student", new { studentId = Student.StudentId })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Delete", "Student", new { studentId = Student.StudentId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

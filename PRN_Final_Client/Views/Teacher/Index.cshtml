@@ -1,0 +1,85 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Teacher> teachersList = (List<Teacher>)ViewData["TeachersList"];
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Teacher List</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("GoToAddPage", "Teacher")" class="btn btn-primary float-left">Add New Teacher</a>
+            </div>
+            <div class="col-md-6">
+                <form method="get" action="@Url.Action("Search", "Teacher")">
+                    <div class="input-group">
+                        <input type="text" name="TeacherId" class="form-control" placeholder="Search by teacher id...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Classes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Search != null)
+                    {
+                        <tr>
+                            <td>@ViewBag.Search.TeacherId</td>
+                            <td>@ViewBag.Search.Mail</td>
+                            <td>@ViewBag.Search.Password</td>
+                            <td>@ViewBag.Search.Role</td>
+                                <td>
+                                @foreach (var classS in ViewBag.Search.Classes)
+                                    {
+                                        <span class="badge badge-secondary">@classS.ClassName</span>
+                                    }
+                                </td>
+                                <td>
+                                <a href="@Url.Action("GoToUpdatePage", "Teacher", new { teacherId = ViewBag.Search.TeacherId })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Delete", "Teacher", new { teacherId = ViewBag.Search.TeacherId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                    }
+                    else
+                    {
+                        foreach (var teacher in teachersList)
+                        {
+                            <tr>
+                                <td>@teacher.TeacherId</td>
+                                <td>@teacher.Mail</td>
+                                <td>@teacher.Password</td>
+                                <td>@teacher.Role</td>
+                                <td>
+                                    @foreach (var classS in teacher.Classes)
+                                    {
+                                        <span class="badge badge-secondary">@classS.ClassName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("GoToUpdatePage", "Teacher", new { teacherId = teacher.TeacherId })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Delete", "Teacher", new { teacherId = teacher.TeacherId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

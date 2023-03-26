@@ -1,0 +1,38 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Class> classesList = (List<Class>)ViewData["ClassesList"];
+}
+
+<h1>Create New Student</h1>
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+<form method="post" action="@Url.Action("Create", "Student")">
+    <div class="form-group">
+        <label for="Mail">Mail:</label>
+        <input type="email" class="form-control" id="Mail" name="Mail" placeholder="Enter student mail" required>
+    </div>
+    <div class="form-group">
+        <label for="Password">Password:</label>
+        <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter student password" required>
+    </div>
+    <div class="form-group">
+        <label for="class">Class:</label>
+        <select class="form-control" id="ClassId" name="ClassId" required>
+            @foreach (var classS in classesList)
+            {
+                <option value="@classS.ClassId">@classS.ClassName</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="@Url.Action("Index", "Student")" class="btn btn-secondary">Back to Index</a>
+</form>

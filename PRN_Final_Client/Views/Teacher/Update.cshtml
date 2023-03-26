@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Update Teacher</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" action="@Url.Action("Update", "Teacher")">
+            <input type="hidden" name="TeacherId" value="@ViewBag.Teacher.TeacherId" />
+            <div class="mb-3">
+                <label class="form-label">Mail</label>
+                <input type="email" name="Mail" class="form-control" value="@ViewBag.Teacher.Mail" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" value="@ViewBag.Teacher.Password" required />
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="@Url.Action("Index", "Teacher")" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+        <div class="alert alert-danger mt-3">@ViewBag.Message</div>
+}

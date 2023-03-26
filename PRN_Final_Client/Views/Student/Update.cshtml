@@ -1,0 +1,49 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Class> classesList = (List<Class>)ViewData["ClassesList"];
+}
+<h2>Update Teacher</h2>
+
+<div class="row">
+    <div class="col-md-9">
+        <form method="post" action="@Url.Action("Update", "Student")">
+            <input type="hidden" name="StudentId" value="@ViewBag.Student.StudentId" />
+            <div class="mb-3">
+                <label class="form-label">Mail</label>
+                <input type="email" name="Mail" class="form-control" value="@ViewBag.Student.Mail" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" value="@ViewBag.Student.Password" required />
+            </div>
+            <div class="mb-3">
+                <label for="class">Class:</label>
+                <select class="form-control" id="ClassId" name="ClassId" required>
+                    @foreach (var classS in classesList)
+                    {
+                        if (classS.ClassId == ViewBag.Student.ClassId)
+                                {
+                            <option value="@classS.ClassId" selected>@classS.ClassName</option>
+                        }
+                        else
+                        {
+                            <option value="@classS.ClassId">@classS.ClassName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="@Url.Action("Index", "Student")" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+        <div class="alert alert-danger mt-3">@ViewBag.Message</div>
+}

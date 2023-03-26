@@ -1,0 +1,45 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Teacher> teachersList = (List<Teacher>)ViewData["TeachersList"];
+}
+<h2>Update Class</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" action="@Url.Action("Update", "Class")">
+            <input type="hidden" name="ClassId" value="@ViewBag.Class.ClassId" />
+            <div class="mb-3">
+                <label class="form-label">ClassName:</label>
+                <input type="text" name="ClassName" class="form-control" value="@ViewBag.Class.ClassName" required />
+            </div>
+            <div class="mb-3">
+                <label for="teacher">Teacher:</label>
+                <select class="form-control" id="TeacherId" name="TeacherId" required>
+                    @foreach (var teacher in teachersList)
+                    {
+                        if (teacher.TeacherId == ViewBag.Class.TeacherId)
+                        {
+                            <option value="@teacher.TeacherId" selected>@teacher.Mail</option>
+                        }
+                        else
+                        {
+                            <option value="@teacher.TeacherId">@teacher.Mail</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="@Url.Action("Index", "Class")" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger mt-3">@ViewBag.Message</div>
+}

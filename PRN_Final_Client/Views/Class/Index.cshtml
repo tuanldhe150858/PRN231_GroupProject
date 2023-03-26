@@ -1,0 +1,94 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Class> classesList = (List<Class>)ViewData["Classlist"];
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Classes List</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("GoToAddPage", "Class")" class="btn btn-primary float-left">Add New Class</a>
+            </div>
+            <div class="col-md-6">
+                <form method="get" action="@Url.Action("Search", "Class")">
+                    <div class="input-group">
+                        <input type="text" name="ClassId" class="form-control" placeholder="Search by class id...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ClassID</th>
+                        <th>ClassName</th>
+                        <th>TeacherId</th>
+                        <th>Students</th>
+                        <th>Subjects</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Search != null)
+                    {
+                        <tr>
+                            <td>@ViewBag.Search.ClassId</td>
+                            <td>@ViewBag.Search.ClassName</td>
+                            <td>@ViewBag.Search.TeacherId</td>
+                            <td>
+                                @foreach (var subject in ViewBag.Search.Subjects)
+                                {
+                                    <span class="badge badge-secondary">@subject.SubjectName</span>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var student in ViewBag.Search.Students)
+                                {
+                                    <span class="badge badge-secondary">@student.Mail</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="@Url.Action("GoToUpdatePage", "Class", new { classId = ViewBag.Search.ClassId })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Delete", "Class", new { classId = ViewBag.Search.ClassId })" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var classS in classesList)
+                        {
+                            <tr>
+                                <td>@classS.ClassId</td>
+                                <td>@classS.ClassName</td>
+                                <td>@classS.TeacherId</td>
+                                <td>
+                                    @foreach (var student in classS.Students)
+                                    {
+                                        <span class="badge badge-secondary">@student.Mail</span>
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var subject in classS.Subjects)
+                                    {
+                                        <span class="badge badge-secondary">@subject.SubjectName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("GoToUpdatePage", "Class", new { classId = classS.ClassId })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Delete", "Class", new { classId = classS.ClassId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

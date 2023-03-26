@@ -1,0 +1,81 @@
+﻿@using PRN_Final_API.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<Subject> subjectsList = (List<Subject>)ViewData["SubjectsList"];
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Classes List</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("GoToAddPage", "Subject")" class="btn btn-primary float-left">Add New Subject</a>
+            </div>
+            <div class="col-md-6">
+                <form method="get" action="@Url.Action("Search", "Subject")">
+                    <div class="input-group">
+                        <input type="text" name="SubjectId" class="form-control" placeholder="Search by subject id...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SubjectId</th>
+                        <th>SubjectName</th>
+                        <th>ClassId</th>
+                        <th>Files</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Search != null)
+                    {
+                        <tr>
+                            <td>@ViewBag.Search.SubjectId</td>
+                            <td>@ViewBag.Search.SubjectName</td>
+                            <td>@ViewBag.Search.ClassId</td>
+                            <td>
+                                @foreach (var file in ViewBag.Search.FileDetails)
+                                {
+                                    <span class="badge badge-secondary">@file.FileName</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="@Url.Action("GoToUpdatePage", "Subject", new { subjectId = ViewBag.Search.SubjectId })" class="btn btn-primary">Edit</a>
+                                <a href="@Url.Action("Delete", "Subject", new { subjectId = ViewBag.Search.SubjectId })" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var subject in subjectsList)
+                        {
+                            <tr>
+                                <td>@subject.SubjectId</td>
+                                <td>@subject.SubjectName</td>
+                                <td>@subject.ClassId</td>
+                                <td>
+                                    @foreach (var file in subject.FileDetails)
+                                    {
+                                        <span class="badge badge-secondary">@file.FileName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("GoToUpdatePage", "Subject", new { subjectId = subject.SubjectId })" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Delete", "Subject", new { subjectId = subject.SubjectId })" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

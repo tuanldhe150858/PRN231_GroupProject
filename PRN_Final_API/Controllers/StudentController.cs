@@ -50,14 +50,16 @@ namespace PRN_Final_API.Controllers
                     t.StudentId,
                     t.Mail,
                     t.Password,
-                    t.Role
+                    t.Role,
+                    t.ClassId
                 }).ToList();
             return Ok(students);
         }
         [HttpGet("GetStudentById")]
-        public async Task<IActionResult> GetStudentById(int id)
+        public async Task<IActionResult> GetStudentById(int studentId)
         {
             var student = context.Students
+                .Where(s => s.StudentId == studentId)
                 .Select(t => new
                 {
                     t.StudentId,
@@ -67,6 +69,33 @@ namespace PRN_Final_API.Controllers
                 }).FirstOrDefault();
             return Ok(student);
         }
-
+        [HttpPut("UpdateStudent")]
+        public async Task<bool> UpdateStudent(StudentDTO studentDTO)
+        {
+            var classS = context.Classes.Where(c => c.ClassId == studentDTO.ClassId).FirstOrDefault();
+            var student = context.Students.Where(t => t.StudentId == studentDTO.StudentId).FirstOrDefault();
+            if (student == null)
+            {
+                return false;
+            }
+            else
+            {
+                student.Mail = studentDTO.Mail;
+                student.Password = studentDTO.Password;
+                student.ClassId = studentDTO.ClassId;
+                student.Class = classS;
+                context.Students.Update(student);
+                if (context.SaveChanges() <= 0) return false;
+                return true;
+            }
+        }
+        [HttpDelete("DeleteStudent")]
+        public async Task<bool> DeleteStudent(int studentId)
+        {
+            var student = context.Students.Where(t => t.StudentId == studentId).FirstOrDefault();
+            context.Students.Remove(student);
+            if (context.SaveChanges() <= 0) return false;
+            return true;
+        }
     }
 }
