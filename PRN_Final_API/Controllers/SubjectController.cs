@@ -39,5 +39,14 @@ namespace PRN_Final_API.Controllers
             if (subject == null) return NotFound();
             else return Ok(subject);
         }
+
+        [HttpGet]
+        [Route("{classId}")]
+        public IActionResult GetSubjectOfClass(int classId)
+        {
+            var subjectOfClass = context.Subjects.Where(s => s.ClassId == classId).ToList();
+            if (subjectOfClass.Any()) return Ok(subjectOfClass);
+            else return NotFound();
+        }
     }
 }
