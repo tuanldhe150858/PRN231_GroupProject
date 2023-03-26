@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ap2aLRD8oQBBPVgKNKt/jM1kKamgTCQwhaIth/2m6ycJchZ4vCWxC1hQrh2fIp9ycSzQp2CcRQ+iYy6r7qYzMw==",
+  "dgSpecHash": "J7v2NQIAfls7L6a1Uw+ednqLHqyN7Dv86NuZzvu7xX1e8Tcb/e8N4Sm9Q/XwnGj5MiLuC9muuCG/Gfk+/ed5HQ==",
   "success": true,
-  "projectFilePath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_Client\\PRN_Final_Client.csproj",
+  "projectFilePath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_Client\\PRN_Final_Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tuanl\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\tuanl\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

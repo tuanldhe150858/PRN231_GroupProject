@@ -2237,11 +2237,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_API\\PRN_Final_API.csproj",
+      "projectUniqueName": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_API\\PRN_Final_API.csproj",
       "projectName": "PRN_Final_API",
-      "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_API\\PRN_Final_API.csproj",
+      "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_API\\PRN_Final_API.csproj",
       "packagesPath": "C:\\Users\\tuanl\\.nuget\\packages\\",
-      "outputPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_API\\obj\\",
+      "outputPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\tuanl\\AppData\\Roaming\\NuGet\\NuGet.Config",

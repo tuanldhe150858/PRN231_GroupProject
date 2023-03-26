@@ -2191,11 +2191,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_Client\\PRN_Final_Client.csproj",
+      "projectUniqueName": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_Client\\PRN_Final_Client.csproj",
       "projectName": "PRN_Final_Client",
-      "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_Client\\PRN_Final_Client.csproj",
+      "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_Client\\PRN_Final_Client.csproj",
       "packagesPath": "C:\\Users\\tuanl\\.nuget\\packages\\",
-      "outputPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_Client\\obj\\",
+      "outputPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\tuanl\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2212,8 +2212,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_API\\PRN_Final_API.csproj": {
-              "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN_Final_API\\PRN_Final_API.csproj"
+            "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_API\\PRN_Final_API.csproj": {
+              "projectPath": "D:\\vs2022Project\\2023\\group_project\\Group_project\\PRN231_GroupProject\\PRN_Final_API\\PRN_Final_API.csproj"
             }
           }
         }
