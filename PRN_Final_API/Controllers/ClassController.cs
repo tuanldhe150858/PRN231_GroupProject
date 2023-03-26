@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using PRN_Final_API.DTO;
 using PRN_Final_API.Models;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace PRN_Final_API.Controllers
 {
@@ -80,5 +81,34 @@ namespace PRN_Final_API.Controllers
             return Ok(classes);
         }
 
+        /// <summary>
+        /// Hung lam
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetAllClass()
+        {
+            return Ok(context.Classes.ToList());
+        }
+
+        [HttpGet]
+        [Route("{name}")]
+        public IActionResult GetClassByName(string name)
+        {
+            var classes = context.Classes.Include(c => c.Subjects)
+                .Where(s => s.ClassName.Equals(name)).ToList();
+            if (classes.Any()) return Ok(classes);
+            else return NotFound();
+        }
+
+        [HttpGet]
+        [Route("{teacherId}")]
+        public IActionResult GetClassByTeacherId(int teacherId)
+        {
+            var classOfTeacher = context.Classes.Include(c => c.Subjects)
+                .Where(c => c.TeacherId == teacherId).ToList();
+            if (classOfTeacher.Any()) return Ok(classOfTeacher);
+            else return NotFound();
+        }
     }
 }
